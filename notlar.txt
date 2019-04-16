@@ -1,5 +1,0 @@
-Users, new users ve employers için ayrý kullanýcý giriþ
-new users için yeni kayýt sayfasýna yönlendir
-dbase baðlantýsý için :https://www.eclipse.org/articles/Article-EclipseDbWebapps/index.html
-
-test

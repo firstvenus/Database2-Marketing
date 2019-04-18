@@ -54,15 +54,15 @@ CREATE TABLE order_detail(
 
 CREATE TABLE employee(
 	ID INT AUTO_INCREMENT PRIMARY KEY,
-    Firstname VARCHAR(50),
-    Lastname VARCHAR(50),
-    Username VARCHAR(50),
-    Password VARCHAR(20),
+    Firstname VARCHAR(50) NOT NULL,
+    Lastname VARCHAR(50) NOT NULL,
+    Username VARCHAR(50) NOT NULL,
+    Password VARCHAR(20) NOT NULL,
     Address VARCHAR(200),
     City VARCHAR(50),
     Phone VARCHAR(12),
     Country VARCHAR(50),
-    Email VARCHAR(100),
+    Email VARCHAR(100) NOT NULL,
     RegisterDate Datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=INNODB;
 

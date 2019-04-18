@@ -27,8 +27,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class FXMLDocumentController implements Initializable{
-    
+public class FXMLDocumentController implements Initializable {
+
     @FXML
     private Label SignIn_Label;
     @FXML
@@ -39,13 +39,14 @@ public class FXMLDocumentController implements Initializable{
     private Button Login_Button;
     @FXML
     private Label SignUp_Label;
-    
+
     @FXML
     private AnchorPane rootPane;
-    
+
     private static DatabaseConnection connection;
+
     @Override
-    public void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL url, ResourceBundle rb) {
         try {
             connection = new DatabaseConnection();
         } catch (SQLException ex) {
@@ -59,31 +60,28 @@ public class FXMLDocumentController implements Initializable{
             }
         });
 
-        
-    }    
-    
-    
-    public void GotoProcutPage(ActionEvent event) throws IOException{
-    
+    }
+
+    public void GotoProductPage(ActionEvent event) throws IOException {
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("ProductPageView.fxml"));
-        
-        Parent parent =  loader.load();      
-            
+
+        Parent parent = loader.load();
+
         Scene scene = new Scene(parent);
-       
+
         ProductPageViewController controller = loader.getController();
         controller.loadProducts();
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         window.setScene(scene);
         window.show();
-    
+
     }
-    
-    
-    private void Login(ActionEvent e) throws IOException{
+
+    private void Login(ActionEvent e) throws IOException {
         String UserName = UserName_TextField.getText();
         String Password = Password_TextField.getText();
 //        if (connection.AdminLogin(UserName, Password)) {
@@ -91,12 +89,11 @@ public class FXMLDocumentController implements Initializable{
 //            //doğruysa ana sayfaya yönlendir
 //            //todo
 //        }
-        if(connection.UserLogin(UserName,Password)){
-             System.err.println("Doğru kullanıcı");
-             GotoProcutPage(e);
-             
-        }
-        else{
+        if (connection.UserLogin(UserName, Password)) {
+            System.err.println("Doğru kullanıcı");
+            GotoProductPage(e);
+
+        } else {
             System.out.println("yanlış kullanıcı adı veya şifre");
 //            //Böyle bir kullanıcı yok
 //            //todo
@@ -104,7 +101,17 @@ public class FXMLDocumentController implements Initializable{
     }
 
     @FXML
-    private void GoToSignUp(MouseEvent event) {
-        //todo
+    private void GoToSignUp(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("RegisterUser.fxml"));
+
+        Parent parent = loader.load();
+
+        Scene scene = new Scene(parent);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        window.show();
     }
 }

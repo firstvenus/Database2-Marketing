@@ -20,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -39,7 +40,11 @@ public class FXMLDocumentController implements Initializable {
     private Button Login_Button;
     @FXML
     private Label SignUp_Label;
-
+    @FXML
+    private CheckBox cb_employee_login;
+    @FXML
+    private Label lbl_error;
+    
     @FXML
     private AnchorPane rootPane;
 
@@ -84,19 +89,26 @@ public class FXMLDocumentController implements Initializable {
     private void Login(ActionEvent e) throws IOException {
         String UserName = UserName_TextField.getText();
         String Password = Password_TextField.getText();
-//        if (connection.AdminLogin(UserName, Password)) {
-//            System.err.println("Doğru Admin");
-//            //doğruysa ana sayfaya yönlendir
-//            //todo
-//        }
-        if (connection.UserLogin(UserName, Password)) {
-            System.err.println("Doğru kullanıcı");
-            GotoProductPage(e);
 
+        if (cb_employee_login.isSelected()) {
+            // Employee login
+            if(connection.EmployeeLogin(UserName, Password)){
+                // Employee login success
+            }
+            else{
+                // Username or password error
+                lbl_error.setText("Username or password incorrect. Please try again");
+            }
         } else {
-            System.out.println("yanlış kullanıcı adı veya şifre");
-//            //Böyle bir kullanıcı yok
-//            //todo
+            // User login
+            if (connection.UserLogin(UserName, Password)) {
+                // User login success
+                GotoProductPage(e);
+
+            } else {
+                // Username or password error
+                lbl_error.setText("Username or password incorrect. Please try again");
+            }
         }
     }
 

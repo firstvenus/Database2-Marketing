@@ -17,10 +17,10 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="UserName_TextField" layoutX="250.0" layoutY="119.0" prefHeight="32.0" prefWidth="300.0" promptText="User Name" />
-      <PasswordField fx:id="Password_TextField" layoutX="250.0" layoutY="182.0" prefHeight="32.0" prefWidth="300.0" promptText="Password" />
-      <Button fx:id="Login_Button" layoutX="365.0" layoutY="276.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="71.0" text="LOGIN" />
-      <Label fx:id="SignUp_Label" layoutX="371.0" layoutY="317.0" onMouseClicked="#GoToSignUp" style="-fx-underline: true;" text="Sign Up" textFill="#efe9e9">
+      <TextField fx:id="UserName_TextField" layoutX="250.0" layoutY="136.0" prefHeight="32.0" prefWidth="300.0" promptText="User Name" />
+      <PasswordField fx:id="Password_TextField" layoutX="250.0" layoutY="199.0" prefHeight="32.0" prefWidth="300.0" promptText="Password" />
+      <Button fx:id="Login_Button" layoutX="365.0" layoutY="293.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="71.0" text="LOGIN" />
+      <Label fx:id="SignUp_Label" layoutX="371.0" layoutY="334.0" onMouseClicked="#GoToSignUp" style="-fx-underline: true;" text="Sign Up" textFill="#efe9e9">
          <font>
             <Font size="17.0" />
          </font>
@@ -31,6 +31,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <CheckBox layoutX="250.0" layoutY="238.0" mnemonicParsing="false" text="Employee Login" textFill="WHITE" />
+      <CheckBox fx:id="cb_employee_login" layoutX="250.0" layoutY="255.0" mnemonicParsing="false" text="Employee Login" textFill="WHITE" />
+      <Label fx:id="lbl_error" layoutX="250.0" layoutY="105.0" prefHeight="18.0" prefWidth="300.0" textFill="RED">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

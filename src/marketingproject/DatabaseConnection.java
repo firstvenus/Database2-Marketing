@@ -39,6 +39,24 @@ public class DatabaseConnection {
         return result;
     }
     
+    public boolean EmployeeLogin(String UserName,String Password){
+        boolean result = false;
+        String SQL = "SELECT * FROM employee WHERE Username = ? AND Password = ?";
+        try{
+            PreparedStatement statement = connection.prepareStatement(SQL,ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            statement.setString(1,UserName);
+            statement.setString(2,Password);
+            ResultSet rsLocal = statement.executeQuery();
+            rsLocal.absolute(0);
+            if(rsLocal.next()){
+              result = true;  
+            }
+        }catch(SQLException ex){
+                Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
     public boolean Signup(String firstname, String lastname,String username, String password, String email,String country,String city,String address,String phone){
         boolean result = false;
         String SQL = "CALL RegisterUser(?,?,?,?,?,?,?,?,?);";

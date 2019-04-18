@@ -44,7 +44,7 @@ public class DatabaseConnection {
     
     public boolean UserLogin(String UserName,String Password){
         boolean result = false;
-        String SQL = "SELECT * FROM user WHERE UserName = ? AND UserPassword = ?";
+        String SQL = "SELECT * FROM user WHERE UserEmail = ? AND UserPassword = ?";
         try{
             PreparedStatement statement = connection.prepareStatement(SQL,ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
             statement.setString(1,UserName);

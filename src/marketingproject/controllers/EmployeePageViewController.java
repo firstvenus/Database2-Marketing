@@ -24,7 +24,14 @@ public class EmployeePageViewController implements Initializable {
     }
 
     @FXML
-    private void btn_add_new_product_event(ActionEvent event) {
+    private void btn_add_new_product_event(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/marketingproject/views/AddProduct.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
     }
 
     @FXML

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="marketingproject.controllers.EmployeePageViewController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="marketingproject.controllers.EmployeePageViewController">
    <children>
       <Button layoutX="45.0" layoutY="42.0" mnemonicParsing="false" onAction="#btn_show_incompleted_orders_Event" text="Show Inompleted Orders" />
       <Button layoutX="403.0" layoutY="144.0" mnemonicParsing="false" onAction="#btn_add_new_product_event" text="Add New Product" />

@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane id="AnchorPane" fx:id="btn_select_image" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="marketingproject.controllers.AddProductController">
+<AnchorPane id="AnchorPane" fx:id="btn_select_image" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx" fx:controller="marketingproject.controllers.AddProductController">
    <children>
       <Label layoutX="299.0" layoutY="55.0" text="Add New Product">
          <font>

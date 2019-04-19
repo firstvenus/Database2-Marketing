@@ -139,8 +139,5 @@ public class AddProductController implements Initializable {
         if(file != null){
             choosen_file = new FileInputStream(file);
         }
-        else{
-            System.out.println(" file emptry sdfsfd");
-        }
     }
 }

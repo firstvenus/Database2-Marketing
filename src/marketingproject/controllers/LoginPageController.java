@@ -21,6 +21,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import marketingproject.DatabaseConnection;
+import marketingproject.models.Employee;
+import marketingproject.models.User;
 
 public class LoginPageController implements Initializable {
 
@@ -54,7 +56,7 @@ public class LoginPageController implements Initializable {
 
     }
 
-    public void GotoProductPage(ActionEvent event) throws IOException {
+    public void GotoProductPage(ActionEvent event,User user) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/marketingproject/views/ProductPageView.fxml"));
@@ -65,6 +67,8 @@ public class LoginPageController implements Initializable {
 
         ProductPageViewController controller = loader.getController();
         controller.loadProducts();
+        controller.setUser(user);
+        
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
@@ -79,9 +83,10 @@ public class LoginPageController implements Initializable {
 
         if (cb_employee_login.isSelected()) {
             // Employee login
-            if(connection.EmployeeLogin(UserName, Password)){
+            Employee emp = connection.EmployeeLogin(UserName, Password);
+            if(emp != null){
                 // Employee login success
-                GotoEmployeepage(e);
+                GotoEmployeepage(e, emp);
             }
             else{
                 // Username or password error
@@ -89,9 +94,10 @@ public class LoginPageController implements Initializable {
             }
         } else {
             // User login
-            if (connection.UserLogin(UserName, Password)) {
+            User user = connection.UserLogin(UserName, Password);
+            if (user != null) {
                 // User login success
-                GotoProductPage(e);
+                GotoProductPage(e, user);
 
             } else {
                 // Username or password error
@@ -115,12 +121,15 @@ public class LoginPageController implements Initializable {
         window.show();
     }
 
-    private void GotoEmployeepage(ActionEvent event) throws IOException{
+    private void GotoEmployeepage(ActionEvent event, Employee emp) throws IOException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/marketingproject/views/EmployeePageView.fxml"));
 
         Parent parent = loader.load();
 
+        EmployeePageViewController ec = loader.getController();
+        ec.setEmployee(emp);
+        
         Scene scene = new Scene(parent);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

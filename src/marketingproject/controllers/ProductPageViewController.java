@@ -9,16 +9,23 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import marketingproject.models.User;
 
 
 public class ProductPageViewController implements Initializable {
 
     @FXML private VBox vbox_products;
+    
+    private User user;
 
     @Override
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
 
+    }
+    
+    public void setUser(User user){
+        this.user = user;
     }
     
     @FXML

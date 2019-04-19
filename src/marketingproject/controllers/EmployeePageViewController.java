@@ -10,13 +10,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import marketingproject.models.Employee;
 
 public class EmployeePageViewController implements Initializable {
 
+    private Employee employee;
+    
+    @FXML public Label lbl_employee_info;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+    }
+    
+    public void setEmployee(Employee employee){
+        this.employee = employee;
+        lbl_employee_info.setText(employee.toString());
     }
 
     @FXML
@@ -57,7 +68,18 @@ public class EmployeePageViewController implements Initializable {
     }
 
     @FXML
-    private void btn_Add_stock_event(ActionEvent event) {
+    private void btn_Add_stock_event(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/marketingproject/views/StockOperation.fxml"));
+        Parent parent = loader.load();
+        
+        StockOperationController soc = loader.getController();
+        soc.setEmployee(employee);
+        
+        Scene scene = new Scene(parent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
     }
 
 }

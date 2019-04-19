@@ -1,4 +1,4 @@
-package marketingproject;
+package marketingproject.controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import marketingproject.DatabaseConnection;
 
 public class RegisterUserController implements Initializable {
 
@@ -48,7 +49,7 @@ public class RegisterUserController implements Initializable {
         try {
             connection = new DatabaseConnection();
         } catch (SQLException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -86,7 +87,7 @@ public class RegisterUserController implements Initializable {
 
     private void goto_login_page(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("FXMLDocument.fxml"));
+        loader.setLocation(getClass().getResource("/marketingproject/views/LoginPage.fxml"));
 
         Parent parent = loader.load();
 

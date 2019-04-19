@@ -82,4 +82,53 @@ public class DatabaseConnection {
         }
         return result;
     } 
+
+    public boolean AddCategory(String category){
+        boolean result = false;
+        String SQL = "INSERT INTO category(Category) VALUES (?);";
+        try{
+            PreparedStatement statement = connection.prepareStatement(SQL,ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            statement.setString(1,category);
+            statement.executeUpdate();
+            result = true;  
+
+        }catch(SQLException ex){
+                Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public boolean AddNewProduct(Integer category_id, String product_name, Integer supplier_id, String image_url, Float kdv_rate){
+        boolean result = false;
+        String SQL = "INSERT INTO product(ProductName,Category_ID,Supplier_id,Image_url,KDV_rate) VALUES (?,?,?,?,?);";
+        try{
+            PreparedStatement statement = connection.prepareStatement(SQL,ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            statement.setString(1,product_name);
+            statement.setInt(2,category_id);
+            statement.setInt(3,supplier_id);
+            statement.setString(4,image_url);
+            statement.setFloat(5,kdv_rate);
+            statement.executeUpdate();
+            result = true;  
+
+        }catch(SQLException ex){
+                Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public boolean AddSupplier(String company_name){
+        boolean result = false;
+        String SQL = "INSERT INTO supplier(CompanyName) VALUES (?);";
+        try{
+            PreparedStatement statement = connection.prepareStatement(SQL,ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            statement.setString(1,company_name);
+            statement.executeUpdate();
+            result = true;  
+
+        }catch(SQLException ex){
+                Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

@@ -210,4 +210,21 @@ public class DatabaseConnection {
         }
         return pList;
     }
+    
+    public boolean AddStock(Integer emp_id, Integer product_id, Integer supplier_id, Integer quantity) {
+        boolean result = false;
+        String SQL = "INSERT INTO stock_operation(Employee_ID,Product_ID,Supplier_ID,Quantity) VALUES (?,?,?,?);";
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQL, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            statement.setInt(1, emp_id);
+            statement.setInt(2, product_id);
+            statement.setInt(3, supplier_id);
+            statement.setInt(4, quantity);
+            statement.executeUpdate();
+            result = true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

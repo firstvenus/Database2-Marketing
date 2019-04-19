@@ -20,6 +20,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import marketingproject.DataStore;
 import marketingproject.DatabaseConnection;
 import marketingproject.models.Employee;
 import marketingproject.models.User;
@@ -56,22 +57,15 @@ public class LoginPageController implements Initializable {
 
     }
 
-    public void GotoProductPage(ActionEvent event,User user) throws IOException {
+    public void GotoProductPage(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/marketingproject/views/ProductPageView.fxml"));
-
         Parent parent = loader.load();
-
         Scene scene = new Scene(parent);
-
         ProductPageViewController controller = loader.getController();
         controller.loadProducts();
-        controller.setUser(user);
-        
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
         window.setScene(scene);
         window.show();
 
@@ -86,7 +80,8 @@ public class LoginPageController implements Initializable {
             Employee emp = connection.EmployeeLogin(UserName, Password);
             if(emp != null){
                 // Employee login success
-                GotoEmployeepage(e, emp);
+                DataStore.getInstance().setEmployee(emp);
+                GotoEmployeepage(e);
             }
             else{
                 // Username or password error
@@ -97,7 +92,8 @@ public class LoginPageController implements Initializable {
             User user = connection.UserLogin(UserName, Password);
             if (user != null) {
                 // User login success
-                GotoProductPage(e, user);
+                DataStore.getInstance().setUser(user);
+                GotoProductPage(e);
 
             } else {
                 // Username or password error
@@ -110,30 +106,19 @@ public class LoginPageController implements Initializable {
     private void GoToSignUp(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/marketingproject/views/RegisterUser.fxml"));
-
         Parent parent = loader.load();
-
         Scene scene = new Scene(parent);
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
         window.setScene(scene);
         window.show();
     }
 
-    private void GotoEmployeepage(ActionEvent event, Employee emp) throws IOException{
+    private void GotoEmployeepage(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/marketingproject/views/EmployeePageView.fxml"));
-
-        Parent parent = loader.load();
-
-        EmployeePageViewController ec = loader.getController();
-        ec.setEmployee(emp);
-        
+        Parent parent = loader.load();        
         Scene scene = new Scene(parent);
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
         window.setScene(scene);
         window.show();
     }

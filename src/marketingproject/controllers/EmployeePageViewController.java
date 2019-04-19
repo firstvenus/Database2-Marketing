@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import marketingproject.DataStore;
 import marketingproject.models.Employee;
 
 public class EmployeePageViewController implements Initializable {
@@ -22,11 +23,7 @@ public class EmployeePageViewController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }
-    
-    public void setEmployee(Employee employee){
-        this.employee = employee;
+        this.employee = DataStore.getInstance().getEmployee();
         lbl_employee_info.setText(employee.toString());
     }
 
@@ -73,13 +70,11 @@ public class EmployeePageViewController implements Initializable {
         loader.setLocation(getClass().getResource("/marketingproject/views/StockOperation.fxml"));
         Parent parent = loader.load();
         
-        StockOperationController soc = loader.getController();
-        soc.setEmployee(employee);
-        
         Scene scene = new Scene(parent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
+
     }
 
 }

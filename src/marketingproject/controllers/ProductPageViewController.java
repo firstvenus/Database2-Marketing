@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import marketingproject.DataStore;
 import marketingproject.models.User;
 
 
@@ -21,11 +22,7 @@ public class ProductPageViewController implements Initializable {
     @Override
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
-
-    }
-    
-    public void setUser(User user){
-        this.user = user;
+          this.user = DataStore.getInstance().getUser();
     }
     
     @FXML

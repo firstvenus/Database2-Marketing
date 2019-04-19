@@ -11,7 +11,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import marketingproject.models.Category;
+import marketingproject.models.Employee;
+import marketingproject.models.Product;
 import marketingproject.models.Supplier;
+import marketingproject.models.User;
 
 public class DatabaseConnection {
 
@@ -30,17 +33,21 @@ public class DatabaseConnection {
         }
     }
 
-    public boolean UserLogin(String UserName, String Password) {
-        boolean result = false;
+    public User UserLogin(String UserName, String Password) {
+        User result = null;
         String SQL = "SELECT * FROM user WHERE Username = ? AND Password = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(SQL, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             statement.setString(1, UserName);
             statement.setString(2, Password);
             ResultSet rsLocal = statement.executeQuery();
-            rsLocal.absolute(0);
             if (rsLocal.next()) {
-                result = true;
+                result = new User();
+                result.ID = rsLocal.getInt("ID");
+                result.Name = rsLocal.getString("Firstname");
+                result.Surname = rsLocal.getString("Lastname");
+                result.Username = rsLocal.getString("Username");
+                result.Email = rsLocal.getString("Email");
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
@@ -48,17 +55,21 @@ public class DatabaseConnection {
         return result;
     }
 
-    public boolean EmployeeLogin(String UserName, String Password) {
-        boolean result = false;
+    public Employee EmployeeLogin(String UserName, String Password) {
+        Employee result = null;
         String SQL = "SELECT * FROM employee WHERE Username = ? AND Password = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(SQL, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             statement.setString(1, UserName);
             statement.setString(2, Password);
             ResultSet rsLocal = statement.executeQuery();
-            rsLocal.absolute(0);
             if (rsLocal.next()) {
-                result = true;
+                result = new Employee();
+                result.ID = rsLocal.getInt("ID");
+                result.Name = rsLocal.getString("Firstname");
+                result.Surname = rsLocal.getString("Lastname");
+                result.Username = rsLocal.getString("Username");
+                result.Email = rsLocal.getString("Email");
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,5 +186,28 @@ public class DatabaseConnection {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         return suppliers;
+    }
+
+    public ArrayList<Product> GetProductsByCategoryId(Integer category_id){
+        ArrayList<Product> pList = new ArrayList<>();
+        String SQL = "SELECT * FROM product WHERE Category_ID=?;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQL, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            statement.setInt(1, category_id);
+            ResultSet rsLocal = statement.executeQuery();
+            while (rsLocal.next()) {
+                Product p = new Product(rsLocal.getInt("ID"), rsLocal.getString("ProductName"));
+                p.Category_ID = rsLocal.getInt("Category_ID");
+                p.Supplier_ID = rsLocal.getInt("Supplier_id");
+                p.Price = rsLocal.getFloat("Price");
+                p.Quantity = rsLocal.getInt("Quantity");
+                p.KDV_Rate = rsLocal.getFloat("KDV_rate");
+                pList.add(p);
+            }
+            
+        } catch (SQLException e) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return pList;
     }
 }

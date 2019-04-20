@@ -7,6 +7,9 @@ public class User {
     public String Surname;
     public String Username;
     public String Email;
+    public String Country;
+    public String City;
+    public String Address;
 
     public User() {
     }

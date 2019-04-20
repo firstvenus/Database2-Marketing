@@ -12,8 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import marketingproject.models.Category;
 import marketingproject.models.Employee;
+import marketingproject.models.OrderDetail;
 import marketingproject.models.Product;
 import marketingproject.models.Supplier;
+import marketingproject.models.UnconfirmedOrder;
 import marketingproject.models.User;
 
 public class DatabaseConnection {
@@ -225,4 +227,95 @@ public class DatabaseConnection {
         }
         return result;
     }
+    
+    public ArrayList<UnconfirmedOrder> GetUnconfirmedOrders(){
+        ArrayList<UnconfirmedOrder> result = null;
+        String SQL = "SELECT * FROM view_incompleted_orders";
+        try{
+            PreparedStatement statement = connection.prepareStatement(SQL, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rsLocal = statement.executeQuery();
+            result = new ArrayList<>();
+            while(rsLocal.next()){
+                UnconfirmedOrder order = new UnconfirmedOrder();
+                order.setUserId(rsLocal.getInt("User_ID"));
+                order.setOrderId(rsLocal.getInt("ID"));
+                order.setUsername(rsLocal.getString("Username"));
+                order.setTotalPrice(rsLocal.getFloat("Total_Price"));
+                order.setTotalkdv(rsLocal.getFloat("Total_KDV"));
+                order.setProductCount(rsLocal.getInt("OrderCount"));
+                order.setOrderDate(rsLocal.getDate("Order_Time"));
+                result.add(order);
+            }
+            
+        }catch(SQLException e){
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return result;
+        
+    }
+
+    public ArrayList<OrderDetail> GetOrderDetail(Integer order_id){
+        ArrayList<OrderDetail> result = null;
+        String SQL = "SELECT * FROM view_order_detail WHERE Order_ID=?";
+        try{
+            PreparedStatement statement = connection.prepareStatement(SQL, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            statement.setInt(1, order_id);
+            ResultSet rsLocal = statement.executeQuery();
+            result = new ArrayList<>();
+            while(rsLocal.next()){
+                OrderDetail order = new OrderDetail();
+                order.setProductId(rsLocal.getInt("Product_ID"));
+                order.setCategory(rsLocal.getString("Category"));
+                order.setProductName(rsLocal.getString("ProductName"));
+                order.setPrice(rsLocal.getFloat("Price"));
+                order.setKdv(rsLocal.getFloat("KDV"));                
+                result.add(order);
+            }
+        }catch(SQLException e){
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return result;
+        
+    }
+    
+    public User GetUserInfo(Integer uid) {
+        User result = null;
+        String SQL = "SELECT * FROM user WHERE ID=?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQL, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            statement.setInt(1, uid);
+            ResultSet rsLocal = statement.executeQuery();
+            if (rsLocal.next()) {
+                result = new User();
+                result.ID = rsLocal.getInt("ID");
+                result.Name = rsLocal.getString("Firstname");
+                result.Surname = rsLocal.getString("Lastname");
+                result.Username = rsLocal.getString("Username");
+                result.Email = rsLocal.getString("Email");
+                result.Country = rsLocal.getString("Country");
+                result.City = rsLocal.getString("City");
+                result.Address = rsLocal.getString("Address");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public boolean ConfirmOrder(Integer oid){
+        boolean result = false;
+        String SQL = "UPDATE orders SET Is_Completed=True WHERE ID=?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQL, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            statement.setInt(1, oid);
+            Integer res = statement.executeUpdate();
+            if (res == 1){
+                result = true;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
 }

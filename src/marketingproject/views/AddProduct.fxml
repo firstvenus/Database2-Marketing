@@ -10,12 +10,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" fx:id="btn_select_image" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx" fx:controller="marketingproject.controllers.AddProductController">
+<AnchorPane id="AnchorPane" fx:id="btn_select_image" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2f343f;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="marketingproject.controllers.AddProductController">
    <children>
-      <Label layoutX="299.0" layoutY="55.0" text="Add New Product">
+      <Label layoutX="231.0" layoutY="44.0" text="Add New Product" textFill="#e2dcdc">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="36.0" />
          </font>
       </Label>
       <GridPane layoutX="209.0" layoutY="114.0" prefHeight="223.0" prefWidth="415.0">
@@ -32,28 +31,28 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Category :">
+            <Label text="Category :" textFill="#e2dcdc">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Supplier :" GridPane.rowIndex="1">
+            <Label text="Supplier :" textFill="#e2dcdc" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Product Name :" GridPane.rowIndex="2">
+            <Label text="Product Name :" textFill="#e2dcdc" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <Label GridPane.rowIndex="4" />
-            <Label text="KDV Rate :" GridPane.rowIndex="4">
+            <Label text="KDV Rate :" textFill="#e2dcdc" GridPane.rowIndex="4">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Image :" GridPane.rowIndex="5">
+            <Label text="Image :" textFill="#e2dcdc" GridPane.rowIndex="5">
                <font>
                   <Font size="14.0" />
                </font>
@@ -62,7 +61,7 @@
             <ChoiceBox fx:id="cb_supplier_select" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txt_product_name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txt_kdv_Rate" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label text="Price :" GridPane.rowIndex="3">
+            <Label text="Price :" textFill="#e2dcdc" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
@@ -80,7 +79,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="57.0" layoutY="60.0" mnemonicParsing="false" onAction="#btn_back_event" text="Back">
+      <Button layoutX="42.0" layoutY="377.0" mnemonicParsing="false" onAction="#btn_back_event" text="Back">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

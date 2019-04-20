@@ -6,23 +6,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="marketingproject.controllers.AddCategoryViewController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2f343f;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="marketingproject.controllers.AddCategoryViewController">
    <children>
-      <Button layoutX="47.0" layoutY="39.0" mnemonicParsing="false" onAction="#btn_back_button_event" text="Back">
+      <Button layoutX="54.0" layoutY="170.0" mnemonicParsing="false" onAction="#btn_back_button_event" text="Back">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="290.0" layoutY="28.0" text="Add Category">
+      <Label layoutX="269.0" layoutY="28.0" text="Add Category" textFill="#edeaea">
          <font>
-            <Font size="36.0" />
+            <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="290.0" layoutY="131.0" text="Category :" />
+      <Label layoutX="290.0" layoutY="131.0" text="Category :" textFill="#edeaea">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
       <TextField fx:id="txt_category" layoutX="361.0" layoutY="127.0" />
       <Button layoutX="467.0" layoutY="170.0" mnemonicParsing="false" onAction="#btn_add_category_button_event" text="Add">
          <font>
-            <Font size="13.0" />
+            <Font size="14.0" />
          </font>
       </Button>
       <Label fx:id="lbl_status_message" layoutX="361.0" layoutY="99.0" />

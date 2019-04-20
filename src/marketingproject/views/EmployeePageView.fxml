@@ -5,13 +5,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="marketingproject.controllers.EmployeePageViewController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2f343f;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="marketingproject.controllers.EmployeePageViewController">
    <children>
-      <Button layoutX="45.0" layoutY="42.0" mnemonicParsing="false" onAction="#btn_show_incompleted_orders_Event" text="Show Inompleted Orders" />
-      <Button layoutX="403.0" layoutY="144.0" mnemonicParsing="false" onAction="#btn_add_new_product_event" text="Add New Product" />
-      <Button layoutX="400.0" layoutY="42.0" mnemonicParsing="false" onAction="#btn_add_new_category_event" text="Add New Category" />
-      <Button layoutX="402.0" layoutY="99.0" mnemonicParsing="false" onAction="#btn_add_new_supplier_event" text="Add New Supplier" />
-      <Button layoutX="45.0" layoutY="170.0" mnemonicParsing="false" onAction="#btn_Add_stock_event" text="Add Stock" />
+      <Button layoutX="488.0" layoutY="120.0" mnemonicParsing="false" onAction="#btn_show_incompleted_orders_Event" text="Show Inompleted Orders">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button layoutX="320.0" layoutY="121.0" mnemonicParsing="false" onAction="#btn_add_new_product_event" text="Add New Product">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button layoutX="99.0" layoutY="121.0" mnemonicParsing="false" onAction="#btn_add_new_category_event" text="Add New Category">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button layoutX="102.0" layoutY="193.0" mnemonicParsing="false" onAction="#btn_add_new_supplier_event" text="Add New Supplier">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button layoutX="320.0" layoutY="193.0" mnemonicParsing="false" onAction="#btn_Add_stock_event" text="Add Stock">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
       <Label layoutX="24.0" layoutY="569.0" text="User :">
          <font>
             <Font size="13.0" />
@@ -20,6 +35,11 @@
       <Label fx:id="lbl_employee_info" layoutX="64.0" layoutY="569.0">
          <font>
             <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="181.0" layoutY="34.0" text="MANAGEMENT CONSOLE" textFill="#e2dfdf">
+         <font>
+            <Font name="Calibri Bold" size="36.0" />
          </font>
       </Label>
    </children>

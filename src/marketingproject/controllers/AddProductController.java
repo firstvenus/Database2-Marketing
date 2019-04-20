@@ -102,7 +102,7 @@ public class AddProductController implements Initializable {
 
         boolean result = false;
         try {
-            result = connection.AddNewProduct(selected_category.ID, product_name, selected_supplier.ID, choosen_file , kdv, price);
+            result = connection.AddNewProduct(selected_category.ID, product_name, choosen_file , kdv, price);
         } catch (IOException ex) {
             Logger.getLogger(AddProductController.class.getName()).log(Level.SEVERE, null, ex);
         }

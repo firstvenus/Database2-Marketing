@@ -118,22 +118,21 @@ public class DatabaseConnection {
         return result;
     }
 
-    public boolean AddNewProduct(Integer category_id, String product_name, Integer supplier_id, FileInputStream image, Double kdv_rate,Double price) throws IOException{
+    public boolean AddNewProduct(Integer category_id, String product_name, FileInputStream image, Double kdv_rate,Double price) throws IOException{
         boolean result = false;
-        String SQL = "INSERT INTO product(ProductName,Category_ID,Supplier_id,Image,KDV_rate,Price) VALUES (?,?,?,?,?,?);";
+        String SQL = "INSERT INTO product(ProductName,Category_ID,Image,KDV_rate,Price) VALUES (?,?,?,?,?);";
         try {
             PreparedStatement statement = connection.prepareStatement(SQL, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             statement.setString(1, product_name);
             statement.setInt(2, category_id);
-            statement.setInt(3, supplier_id);
             if(image != null){
-                statement.setBinaryStream(4, image,image.available());
+                statement.setBinaryStream(3, image,image.available());
             }
             else{
-                 statement.setBinaryStream(4, null);
+                 statement.setBinaryStream(3, null);
             }
-            statement.setDouble(5, kdv_rate);
-            statement.setDouble(6, price);
+            statement.setDouble(4, kdv_rate);
+            statement.setDouble(5, price);
             statement.executeUpdate();
             result = true;
 
@@ -198,7 +197,6 @@ public class DatabaseConnection {
             while (rsLocal.next()) {
                 Product p = new Product(rsLocal.getInt("ID"), rsLocal.getString("ProductName"));
                 p.Category_ID = rsLocal.getInt("Category_ID");
-                p.Supplier_ID = rsLocal.getInt("Supplier_id");
                 p.Price = rsLocal.getFloat("Price");
                 p.Quantity = rsLocal.getInt("Quantity");
                 p.KDV_Rate = rsLocal.getFloat("KDV_rate");

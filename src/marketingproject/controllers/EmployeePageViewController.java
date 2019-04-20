@@ -28,7 +28,14 @@ public class EmployeePageViewController implements Initializable {
     }
 
     @FXML
-    private void btn_show_incompleted_orders_Event(ActionEvent event) {
+    private void btn_show_incompleted_orders_Event(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/marketingproject/views/UnconfirmedOrders.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
     }
 
     @FXML

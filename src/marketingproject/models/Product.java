@@ -5,7 +5,6 @@ public class Product {
     public Integer ID;
     public String ProductName;
     public Integer Category_ID;
-    public Integer Supplier_ID;
     public Float Price;
     public Integer Quantity;
     public Float KDV_Rate;

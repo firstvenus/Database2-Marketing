@@ -14,6 +14,7 @@ import marketingproject.models.Category;
 import marketingproject.models.Employee;
 import marketingproject.models.OrderDetail;
 import marketingproject.models.Product;
+import marketingproject.models.PurchaseType;
 import marketingproject.models.Supplier;
 import marketingproject.models.UnconfirmedOrder;
 import marketingproject.models.User;
@@ -21,10 +22,10 @@ import marketingproject.models.User;
 public class DatabaseConnection {
 
     public static Connection connection;
-
+    MysqlDataSource datasource;
     public DatabaseConnection() throws SQLException {
         try {
-            MysqlDataSource datasource = new MysqlDataSource();
+            datasource = new MysqlDataSource();
             datasource.setUser("root");
             datasource.setPassword("1234");
             datasource.setPort(3306);
@@ -202,6 +203,8 @@ public class DatabaseConnection {
                 p.Price = rsLocal.getFloat("Price");
                 p.Quantity = rsLocal.getInt("Quantity");
                 p.KDV_Rate = rsLocal.getFloat("KDV_rate");
+                p.Image = rsLocal.getBytes("Image");
+                
                 pList.add(p);
             }
             
@@ -318,4 +321,80 @@ public class DatabaseConnection {
         return result;
     }
     
+    public ArrayList<Product> GetProductsByCategoryName(String category_name){
+        ArrayList<Product> pList = new ArrayList<>();
+        String SQL = "SELECT p.* FROM product AS p INNER JOIN category AS c ON c.ID=p.Category_ID WHERE c.Category=?;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQL, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            statement.setString(1, category_name);
+            ResultSet rsLocal = statement.executeQuery();
+            while (rsLocal.next()) {
+                Product p = new Product(rsLocal.getInt("ID"), rsLocal.getString("ProductName"));
+                p.Category_ID = rsLocal.getInt("Category_ID");
+                p.Price = rsLocal.getFloat("Price");
+                p.Quantity = rsLocal.getInt("Quantity");
+                p.KDV_Rate = rsLocal.getFloat("KDV_rate");
+                p.Image =  rsLocal.getBytes("Image");
+                pList.add(p);
+            }
+            
+        } catch (SQLException e) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return pList;
+    }
+    
+    public ArrayList<PurchaseType> GetPaymentTypes(){
+        ArrayList<PurchaseType> pList = new ArrayList<>();
+        String SQL = "SELECT * FROM purchase_type;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQL, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rsLocal = statement.executeQuery();
+            while (rsLocal.next()) {
+                PurchaseType p = new PurchaseType();
+                p.ID = rsLocal.getShort("ID");
+                p.PurchaseType = rsLocal.getString("PurchaseType");
+                pList.add(p);
+            }
+            
+        } catch (SQLException e) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return pList;
+    }
+ 
+    public void MakePayment(ArrayList<Product> products, Integer userid, Integer paymentid){
+        String sql_order_insert = "INSERT INTO orders(User_ID,Total_Price,Total_KDV) VALUES(?,0.0,0.0);";
+        String sql_select_last_insert_id = "SELECT LAST_INSERT_ID() as id;";
+        String sql_insert_order_detail = "INSERT INTO order_detail(Order_ID,Product_ID,Price,KDV) VALUES(?,?,?,?);";
+        String sql_insert_payment = "INSERT INTO purchase(Order_ID, Purchase_Type_ID) VALUES (?,?);";
+        // ınsert an order
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql_order_insert, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            statement.setInt(1, userid);
+            statement.executeUpdate();
+            statement = connection.prepareStatement(sql_select_last_insert_id, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet res =  statement.executeQuery();
+            res.next();
+            Integer order_id = res.getInt("id");
+            
+            for(Product p: products){
+                statement = connection.prepareStatement(sql_insert_order_detail, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                Float kdv = p.Price * (p.KDV_Rate/100);
+                statement.setInt(1, order_id);
+                statement.setInt(2, p.ID);
+                statement.setDouble(3, p.Price);
+                statement.setDouble(4, (double)Math.round(kdv*100)/100);
+                statement.executeUpdate();
+            }
+            
+            statement = connection.prepareStatement(sql_insert_payment, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            statement.setInt(1, order_id);
+            statement.setInt(2, paymentid);
+            statement.executeQuery();
+            
+        }catch(SQLException e){
+            System.out.println(e);
+        }   
+    }   
 }

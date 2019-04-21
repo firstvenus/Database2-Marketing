@@ -63,8 +63,6 @@ public class LoginPageController implements Initializable {
         loader.setLocation(getClass().getResource("/marketingproject/views/ProductPageView.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
-        ProductPageViewController controller = loader.getController();
-        controller.loadProducts();
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();

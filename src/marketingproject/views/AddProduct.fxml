@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="btn_select_image" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2f343f;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="marketingproject.controllers.AddProductController">
+<AnchorPane id="AnchorPane" fx:id="btn_select_image" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2f343f;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="marketingproject.controllers.AddProductController">
    <children>
       <Label layoutX="231.0" layoutY="44.0" text="Add New Product" textFill="#e2dcdc">
          <font>

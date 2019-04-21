@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="77.0" prefWidth="220.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="marketingproject.controllers.CartProductItemController">
+   <children>
+      <Label fx:id="lbl_product_name" layoutX="7.0" layoutY="5.0" prefHeight="40.0" prefWidth="206.0" text="Label procut name" wrapText="true">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_price" layoutX="7.0" layoutY="50.0" prefHeight="19.0" prefWidth="85.0" text="Label price" AnchorPane.rightAnchor="128.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button layoutX="152.0" layoutY="47.0" mnemonicParsing="false" onAction="#btn_remove_button_click_event" style="-fx-background-color: #ff0000;" text="Remove" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

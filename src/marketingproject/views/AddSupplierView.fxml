@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2f343f;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="marketingproject.controllers.AddSupplierViewController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2f343f;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="marketingproject.controllers.AddSupplierViewController">
    <children>
       <Button layoutX="47.0" layoutY="208.0" mnemonicParsing="false" onAction="#btn_back_button_event" prefHeight="17.0" prefWidth="92.0" text="Back">
          <font>
@@ -28,6 +28,6 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Label fx:id="lbl_status_message" layoutX="361.0" layoutY="99.0" />
+      <Label fx:id="lbl_status_message" layoutX="377.0" layoutY="136.0" prefHeight="20.0" prefWidth="149.0" />
    </children>
 </AnchorPane>

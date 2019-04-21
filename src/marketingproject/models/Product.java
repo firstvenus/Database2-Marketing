@@ -8,6 +8,7 @@ public class Product {
     public Float Price;
     public Integer Quantity;
     public Float KDV_Rate;
+    public byte[] Image;
     
     public Product(Integer id,String productName){
         this.ID = id;

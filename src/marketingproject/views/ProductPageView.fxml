@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="426.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="marketingproject.controllers.ProductPageViewController">
+<VBox prefHeight="426.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="marketingproject.controllers.ProductPageViewController">
   <children>
     <SplitPane dividerPositions="0.2026726057906459, 0.7750556792873051" focusTraversable="true" maxHeight="523.0" prefHeight="523.0" prefWidth="1024.0" VBox.vgrow="ALWAYS">
       <items>
@@ -51,7 +51,7 @@
                         </ScrollPane>
                      </children>
                   </AnchorPane>
-                  <GridPane layoutX="23.0" layoutY="558.0" prefHeight="72.0" prefWidth="180.0">
+                  <GridPane layoutX="24.0" layoutY="514.0" prefHeight="72.0" prefWidth="180.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="10.0" prefWidth="54.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="126.0" />
@@ -83,7 +83,10 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <Button layoutX="121.0" layoutY="630.0" mnemonicParsing="false" onAction="#btn_payment_click_event" prefHeight="25.0" prefWidth="92.0" text="Payment" />
+                  <Button fx:id="btn_payment" layoutX="24.0" layoutY="586.0" mnemonicParsing="false" onAction="#btn_payment_click_event" prefHeight="25.0" prefWidth="187.0" text="Payment">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Button>
           </children>
         </AnchorPane>
       </items>

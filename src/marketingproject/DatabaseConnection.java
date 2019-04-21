@@ -363,12 +363,13 @@ public class DatabaseConnection {
         return pList;
     }
  
-    public void MakePayment(ArrayList<Product> products, Integer userid, Integer paymentid){
+    public Integer MakePayment(ArrayList<Product> products, Integer userid, Integer paymentid){
         String sql_order_insert = "INSERT INTO orders(User_ID,Total_Price,Total_KDV) VALUES(?,0.0,0.0);";
         String sql_select_last_insert_id = "SELECT LAST_INSERT_ID() as id;";
         String sql_insert_order_detail = "INSERT INTO order_detail(Order_ID,Product_ID,Price,KDV) VALUES(?,?,?,?);";
         String sql_insert_payment = "INSERT INTO purchase(Order_ID, Purchase_Type_ID) VALUES (?,?);";
         // ınsert an order
+        Integer order_id = 0;
         try{
             PreparedStatement statement = connection.prepareStatement(sql_order_insert, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             statement.setInt(1, userid);
@@ -376,7 +377,7 @@ public class DatabaseConnection {
             statement = connection.prepareStatement(sql_select_last_insert_id, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet res =  statement.executeQuery();
             res.next();
-            Integer order_id = res.getInt("id");
+            order_id = res.getInt("id");
             
             for(Product p: products){
                 statement = connection.prepareStatement(sql_insert_order_detail, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -395,6 +396,7 @@ public class DatabaseConnection {
             
         }catch(SQLException e){
             System.out.println(e);
-        }   
+        }
+        return order_id;
     }   
 }

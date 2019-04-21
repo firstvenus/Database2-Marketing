@@ -58,15 +58,14 @@ public class LoginPageController implements Initializable {
     }
 
     public void GotoProductPage(ActionEvent event) throws IOException {
-
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/marketingproject/views/ProductPageView.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
+        window.setTitle("Store");
         window.show();
-
     }
 
     private void Login(ActionEvent e) throws IOException {
@@ -108,6 +107,7 @@ public class LoginPageController implements Initializable {
         Scene scene = new Scene(parent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
+        window.setTitle("Register user");
         window.show();
     }
 
@@ -118,6 +118,7 @@ public class LoginPageController implements Initializable {
         Scene scene = new Scene(parent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
+        window.setTitle("Employee Page");
         window.show();
     }
 }

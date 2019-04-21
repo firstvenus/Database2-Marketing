@@ -88,14 +88,11 @@ public class RegisterUserController implements Initializable {
     private void goto_login_page(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/marketingproject/views/LoginPage.fxml"));
-
         Parent parent = loader.load();
-
         Scene scene = new Scene(parent);
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
         window.setScene(scene);
+        window.setTitle("Login Page");
         window.show();
     }
     

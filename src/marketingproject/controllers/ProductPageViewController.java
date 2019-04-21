@@ -1,5 +1,6 @@
 package marketingproject.controllers;
 
+import com.sun.javaws.Main;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -15,8 +16,11 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -37,6 +41,7 @@ public class ProductPageViewController implements Initializable {
     @FXML private VBox vbox_cart;
     @FXML private Label lbl_total_price;
     @FXML private Label lbl_total_kdv;
+    @FXML private Button btn_payment;
     
     private User user;
     private DatabaseConnection connection;
@@ -67,7 +72,6 @@ public class ProductPageViewController implements Initializable {
             public void productRemoved(ArrayList<Product> products, Product product)  {
                 loadTotals(products);
                 loadCartProduct();
-
             }
         });
           
@@ -102,6 +106,10 @@ public class ProductPageViewController implements Initializable {
             
             vbox_categories.getChildren().add(l);
         }
+        ImageView imageView = new ImageView(new Image("file:appicon.png"));
+        imageView.setFitHeight(20);
+        imageView.setFitWidth(20);
+        btn_payment.setGraphic(imageView);
     }
 
     public void loadProduct(Product p) throws IOException{
@@ -125,6 +133,12 @@ public class ProductPageViewController implements Initializable {
         
         ArrayList<Product> plist = DataStore.getInstance().getCartProducts();
         vbox_cart.getChildren().remove(0, vbox_cart.getChildren().size());
+        
+        if(plist.size() > 0){
+            btn_payment.setDisable(false);
+        }else{
+            btn_payment.setDisable(true);
+        }
         
         for (int i = 0; i < plist.size(); i++) {
             FXMLLoader loader = new FXMLLoader();

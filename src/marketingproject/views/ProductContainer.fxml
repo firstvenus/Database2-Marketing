@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="132.0" maxWidth="460.0" minHeight="103.0" minWidth="460.0" prefHeight="103.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="marketingproject.controllers.ProductContainerController">
+<AnchorPane id="AnchorPane" maxHeight="132.0" maxWidth="460.0" minHeight="103.0" minWidth="460.0" prefHeight="103.0" prefWidth="460.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="marketingproject.controllers.ProductContainerController">
     <children>
       <ImageView fx:id="img_product_image" fitHeight="90.0" fitWidth="146.0" pickOnBounds="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
          <image>

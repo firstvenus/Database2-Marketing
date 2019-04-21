@@ -16,8 +16,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import marketingproject.DataStore;
 import marketingproject.DatabaseConnection;
@@ -32,6 +34,7 @@ public class PaymentController implements Initializable {
     @FXML private Label lbl_total_kdv;
     @FXML private ChoiceBox<PurchaseType> cb_payment_type;
     @FXML private Label lbl_status;
+    @FXML private Button btn_pay;
     
     private DatabaseConnection connection;
 
@@ -71,14 +74,28 @@ public class PaymentController implements Initializable {
     @FXML
     private void btn_pay_click_event(ActionEvent event) throws IOException{
         PurchaseType ptype = cb_payment_type.getSelectionModel().getSelectedItem();
-        if(ptype != null){
-            connection.MakePayment(
-                    DataStore.getInstance().getCartProducts(), 
-                    DataStore.getInstance().getUser().ID, 
-                    (int)ptype.ID);
+        if (ptype != null) {
+            
+            DataStore store = DataStore.getInstance();
+            
+            Integer oid = connection.MakePayment(
+                                    store.getCartProducts(),
+                                    store.getUser().ID,
+                                    (int) ptype.ID);
+            
+            if(oid <= 0){
+                lbl_status.setText("An error occured ..");
+                lbl_status.setTextFill(Color.RED);
+            }else{
+                lbl_status.setText("Payment successful. Order ID : " + oid);
+                lbl_status.setTextFill(Color.YELLOWGREEN);
+                store.getCartProducts().clear();
+                btn_pay.setDisable(true);
+            }
         }
         else{
             lbl_status.setText("Please select payment type ..");
+            lbl_status.setTextFill(Color.RED);
         }
     }
     
